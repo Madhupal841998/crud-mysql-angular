@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content white-text">
+          <div class="row">
+            <div class="col s5">
+              <form #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)">
+                
+                <input type="hidden" name="id" #id="ngModel" [(ngModel)]="studentsService.selectedStudent.id">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <label>Name :
+                        <label class="red-text">*</label>
+                      </label>
+                    <input type="text" name="name" #name="ngModel" [(ngModel)]="studentsService.selectedStudent.name" placeholder="Enter full name" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <label>Class :</label>
+                    <input type="text" name="class" #name="ngModel" [(ngModel)]="studentsService.selectedStudent.class" placeholder="Eg : 1A">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <button class="btn btn-custom right" type="button" (click)="resetForm(studentForm)">Reset</button>
+                    <button class="btn btn-custom right" type="submit" [disabled]="!studentForm.valid">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col s7">
+              
+                <div ng-controller="myController">
+                        <i class="material-icons">search</i>
+                    <input type="search" placeholder="Search by Students ID"  style="width: 450px; padding: 2px 20px; margin: 10px 0px; height: 30%; " [(ngModel)]="filterText.id"/>{{filterText.id}}
+                </div>
+                    <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tr *ngFor="let st of studentsService.students | filterBy: filterText">
+                      <td>{{st.name}}</td>
+                      <td>{{st.class}}</td>
+                    </tr>
+                    <div *ngIf="(studentsService.students | filterBy: filterText).length ===0">No Match</div>
+                  </table>
+            </div>
+            <div class="col s7">
+                  <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Class</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tr *ngFor="let st of studentsService.students ">
+                    <td>{{st.name}}</td>
+                    <td>{{st.class}}</td>
+                    <td>
+                        <a class="action-btn" (click)="onEdit(st)">
+                          <i class="material-icons">edit</i>
+                        </a>
+                        <a class="action-btn" (click)="onDelete(st.id,studentForm)">
+                          <i class="material-icons">delete</i>
+                        </a>
+                      </td>
+                  </tr>
+                  <a class="action-btn" (click)="onDeleteAll()">
+                    Empty Table<i class="large material-icons">delete_forever</i>
+                  </a>
+                </table>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
