@@ -22,8 +22,8 @@ export class StudentsService {
     return this.http.get(this.baseURL);
   }
 
-  getStudentListById(id: number) {
-    return this.http.get(this.baseURL + `/${id}`);
+  getStudentListByName(name: string) {
+    return this.http.get(this.baseURL + `/${name}`);
   }
 
   putStudent(st: Students) {
