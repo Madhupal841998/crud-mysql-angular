@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
+/*router.get('/:id', (req, res) => {
     const studentId = req.params.id;
     var q = "SELECT * FROM students WHERE id = ?"
         con.query(q,[studentId], (err, doc) => {
@@ -22,6 +22,15 @@ router.get('/:id', (req, res) => {
             else { console.log('Error in retrieving Students:' + JSON.stringify(err, undefined, 2)); }
     });
 });
+*/
+router.get('/:name', (req, res) => {
+    const studentName = req.params.name;
+    var q = "SELECT * FROM students WHERE name = ?"
+    con.query(q,[studentName], (err, doc) => {
+        if( !err) { res.send(doc);}
+        else { console.log('Error in retrieving Students:' + JSON.stringify(err, undefined, 2)); }
+    })
+})
 
 router.post('/', (req, res) => {
          
