@@ -14,7 +14,7 @@ declare var M: any;
   providers: [StudentsService]
 })
 export class StudentsComponent implements OnInit{
-  filterText: Students = {id: 0, name: "", class: ""};
+  filterText: any = { name:''};
   constructor(public studentsService: StudentsService) { }
 
   ngOnInit() {
